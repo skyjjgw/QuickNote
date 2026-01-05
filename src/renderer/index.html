@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickNote</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="context-menu.css">
+    <link rel="stylesheet" href="shortcut-bar.css">
+</head>
+<body>
+    <div id="title-bar">
+        <div id="drag-region">QuickNote</div>
+        <div id="window-controls">
+            <button id="save-as-btn" title="另存为 (Ctrl+Alt+S)">💾</button>
+            <button id="mode-btn" title="切换模式 (Ctrl+Space)">🪟</button>
+            <button id="min-btn">─</button>
+            <button id="close-btn">×</button>
+        </div>
+    </div>
+
+    <div id="shortcut-bar" class="hidden">
+        <span>Ctrl+S 保存</span>
+        <span>Ctrl+Space 切换模式</span>
+        <span>Backspace 删除</span>
+    </div>
+
+    <div id="main-container">
+        <div id="sidebar">
+            <div id="sidebar-header">
+                <span>笔记列表</span>
+                <button id="add-note-btn">+</button>
+            </div>
+            <ul id="note-list">
+                <!-- 笔记列表项 -->
+            </ul>
+        </div>
+        <div id="editor-container">
+            <textarea id="editor" placeholder="在此输入笔记... (Markdown支持)"></textarea>
+            <div id="preview" class="markdown-body"></div>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
