@@ -1,65 +1,81 @@
-# QuickNote
+# Packaging Guide for QuickNote
 
-A lightweight, cross-platform desktop sticky note application built with Electron. It supports Markdown syntax and provides a minimalist floating window mode for efficiency.
+This guide details the steps to package the QuickNote source code into a standalone desktop installer (e.g., `.exe` for Windows).
 
-## Features
+## Prerequisites
 
-*   **Dual Mode**:
-    *   **Expanded Mode**: Full note editing and management interface.
-    *   **Floating Mode**: Compact desktop overlay for quick reference.
-*   **Markdown Support**: Headers, lists, bold text, code blocks, etc.
-*   **Auto-Save**: Changes are saved automatically in real-time.
-*   **Multi-Note Management**: Create, delete, and switch between multiple notes.
-*   **Recycle Bin**: Protects against accidental deletion.
-*   **System Integration**: Tray icon and auto-start support.
+Before you begin, ensure you have the following installed on your development machine:
 
-## Installation
+1.  **Node.js**: v16.0.0 or higher.
+    *   Download: [https://nodejs.org/](https://nodejs.org/)
+2.  **Git**: For version control (optional but recommended).
+    *   Download: [https://git-scm.com/](https://git-scm.com/)
 
-### From Source
+## Packaging Steps
 
-To run the application from the source code, please follow these steps:
+### 1. Open Terminal
 
-1.  **Prerequisites**:
-    *   Ensure [Node.js](https://nodejs.org/) (v16 or higher) is installed.
-    *   Ensure [Git](https://git-scm.com/) is installed.
+Open your preferred terminal (Command Prompt, PowerShell, or VS Code Terminal) and navigate to the project root directory.
 
-2.  **Clone the Repository**:
-    ```bash
-    git clone https://github.com/skyjjgw/QuickNote.git
-    cd QuickNote
-    ```
-    *(Note: If you have the source code locally at `d:\note\src\`, simply navigate to the root directory `d:\note` in your terminal.)*
+```powershell
+cd d:\note
+```
 
-3.  **Install Dependencies**:
-    ```bash
-    npm install
-    # OR if you use yarn
-    yarn install
-    ```
+### 2. Install Dependencies
 
-4.  **Run the Application**:
-    ```bash
-    npm start
-    ```
+Ensure all project dependencies are installed. This includes `electron` and `electron-builder`.
 
-### Build from Source
+Using **npm**:
+```bash
+npm install
+```
 
-To create a distributable installer (e.g., .exe for Windows):
+Or using **yarn** (recommended if you encounter errors with npm):
+```bash
+yarn install
+```
+
+### 3. Build the Installer
+
+Run the build script defined in `package.json`. This command will compile the code and generate the installer.
 
 ```bash
 npm run build
 ```
 
-The output files will be located in the `release` (or configured output) directory.
+*Note: The first time you run this, it may take a few minutes to download necessary Electron binaries.*
 
-## Shortcuts
+### 4. Locate the Installer
 
-| Action | Shortcut |
-| :--- | :--- |
-| **Toggle Mode** | `Ctrl + Space` |
-| **Show/Hide** | `Ctrl + Alt + M` (Global) |
-| **Save As** | `Ctrl + Alt + S` |
-| **Delete Note** | `Backspace` |
-| **New Note** | `Ctrl + N` |
-| **Zoom** | `Ctrl + +` / `Ctrl + -` |
+Once the build process completes successfully, the installer file will be generated in the **`release_v2`** directory (as configured in `package.json`).
 
+*   **Path**: `d:\note\release_v2\`
+*   **File Name**: `QuickNote Setup 1.0.0.exe`
+
+## Troubleshooting
+
+### Common Errors
+
+*   **EPERM / File Locked**: If you see "operation not permitted" errors, it usually means a file is in use.
+    *   **Solution**: Close any running instances of QuickNote, close other terminals, and try again. You can also try clearing the cache:
+        ```bash
+        npm cache clean --force
+        ```
+*   **Download Failed**: If Electron binaries fail to download due to network issues.
+    *   **Solution**: Check your internet connection or try using a mirror.
+
+## Customization
+
+To change the output directory or build settings, modify the `package.json` file:
+
+```json
+"build": {
+  "directories": {
+    "output": "release_v2" // Change this folder name
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true
+  }
+}
+```
