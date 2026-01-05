@@ -51,11 +51,4 @@ npm run build -- --mac
 npm run build -- --linux
 ```
 
-## 数据存储
 
-*   **开发环境**: `D:\note\all` (Windows)
-*   **生产环境**: `AppData/Roaming/QuickNote/notes`
-
-## License
-
-MIT
