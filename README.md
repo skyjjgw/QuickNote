@@ -63,6 +63,3 @@ The output files will be located in the `release` (or configured output) directo
 | **New Note** | `Ctrl + N` |
 | **Zoom** | `Ctrl + +` / `Ctrl + -` |
 
-## License
-
-MIT
