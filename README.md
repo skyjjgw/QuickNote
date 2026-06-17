@@ -79,6 +79,4 @@ To change the output directory or build settings, modify the `package.json` file
   }
 }
 ```
----------
----------
 
